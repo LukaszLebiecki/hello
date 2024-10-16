@@ -10,7 +10,7 @@ public class HeadsOrTails {
         final int reverse = 0;
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Wbierz orzeł czy reszka (1 - orzeł; 0 - reszka): ");
+        System.out.println("Wbierz orzeł czy reszka ( " + obverse + " - orzeł; " + reverse + " - reszka): ");
         int userChoice = scanner.nextInt();
         Random random = new Random();
         int flipResult = random.nextInt(2);
