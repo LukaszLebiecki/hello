@@ -11,6 +11,9 @@ public class Patient {
         this.lastName = lastName;
         this.PESEL = PESEL;
     }
+    public Patient() {
+
+    }
 
     public String getFirstName() {
         return firstName;
