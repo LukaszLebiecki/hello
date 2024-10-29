@@ -1,5 +1,6 @@
 package Exception.Exercise2;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CompetitionController {
@@ -19,13 +20,26 @@ public class CompetitionController {
         System.out.print("Podaj nazwę zawodów: ");
         String competitionName = scanner.nextLine();
         System.out.print("Podaj maksymalną liczbę uczestników: ");
-        int maxParticipants = scanner.nextInt();
+        int maxParticipants = readNumberFromUser();
         System.out.print("Podaj ograniczenie wiekowe: ");
-        int ageLimit = scanner.nextInt();
-        scanner.nextLine();
-        if (maxParticipants <= 0 || ageLimit <= 0)
-            throw new IllegalArgumentException("Dane nie mogą być ujemne");
+        int ageLimit = readNumberFromUser();
         return new Competition(competitionName, maxParticipants, ageLimit);
+    }
+
+    private int readNumberFromUser() {
+        int number = -1;
+        while (number < 0) {
+            try {
+                number = scanner.nextInt();
+                if (number < 0)
+                    System.out.println("Podana liczba musi być dodatnia");
+            } catch (InputMismatchException e) {
+                System.err.println("Musisz podac liczbe");
+            } finally {
+                scanner.nextLine();
+            }
+        }
+        return number;
     }
 
     private void fillParticipantsInfo(Competition competition) {
@@ -48,11 +62,7 @@ public class CompetitionController {
         System.out.print("Podaj id (np. pesel): ");
         String id = scanner.nextLine();
         System.out.print("Podaj wiek: ");
-        int age = scanner.nextInt();
-        scanner.nextLine();
-        if (age <= 0) {
-            throw new IllegalArgumentException("Wiek nie może być ujemny");
-        }
+        int age = readNumberFromUser();
         return new Participant(firstName, lastName, id, age);
     }
 
